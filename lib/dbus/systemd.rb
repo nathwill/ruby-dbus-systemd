@@ -11,12 +11,10 @@ module DBus
 
     def system_bus
       DBus::SystemBus.instance
-                     .service(INTERFACE)
     end
 
     def session_bus
       DBus::SessionBus.instance
-                      .service(INTERFACE)
     end
 
     module_function :system_bus, :session_bus
