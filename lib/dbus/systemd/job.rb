@@ -1,5 +1,7 @@
-module DBus::Systemd
-  class Job
+module DBus
+  module Systemd
+    class Job
 
+    end
   end
 end
