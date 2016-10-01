@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'dbus/systemd/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "ruby-dbus-systemd"
+  spec.name          = "dbus-systemd"
   spec.version       = DBus::Systemd::VERSION
   spec.authors       = ["Nathan Williams"]
   spec.email         = ["nath.e.will@gmail.com"]
