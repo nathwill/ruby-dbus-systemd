@@ -1,4 +1,4 @@
-module Dbus
+module DBus
   module Systemd
     VERSION = "0.1.0"
   end

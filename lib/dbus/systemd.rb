@@ -1,12 +1,12 @@
-require_relative "dbus/systemd/version"
-require_relative "dbus/systemd/interface"
-require_relative "dbus/systemd/manager"
-require_relative "dbus/systemd/unit"
-require_relative "dbus/systemd/job"
+require_relative "systemd/version"
+require_relative "systemd/interface"
+require_relative "systemd/manager"
+require_relative "systemd/unit"
+require_relative "systemd/job"
 
 require "dbus"
 
-module Dbus
+module DBus
   module Systemd
     def system_bus
       DBus::SystemBus.instance
