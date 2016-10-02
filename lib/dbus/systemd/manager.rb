@@ -80,6 +80,10 @@ module DBus
 
         mapped
       end
+
+      def method_missing(name, *args, &blk)
+        @object.send(name, *args, &blk) if @object.respond_to?(name)
+      end
     end
   end
 end

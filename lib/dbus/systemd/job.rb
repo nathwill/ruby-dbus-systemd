@@ -8,6 +8,10 @@ module DBus
         @object = manager.service.object(job_path)
                                  .tap(&:introspect)
       end
+
+      def method_missing(name, *args, &blk)
+        @object.send(name, *args, &blk) if @object.respond_to?(name)
+      end
     end
   end
 end
