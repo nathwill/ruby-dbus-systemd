@@ -1,5 +1,6 @@
 require_relative '../systemd'
 require_relative 'unit'
+require_relative 'method_missing'
 
 module DBus
   module Systemd
@@ -29,10 +30,12 @@ module DBus
         unit_object_path: 5
       }
 
+      include MethodMissing
+
       attr_accessor :service, :object
 
-      def initialize(bus = DBus::Systemd.system_bus)
-        @service = bus.service(DBus::Systemd::INTERFACE)
+      def initialize(bus = Systemd.system_bus)
+        @service = bus.service(Systemd::INTERFACE)
         @object = @service.object(OBJECT)
                           .tap(&:introspect)
       end
@@ -79,18 +82,6 @@ module DBus
         end
 
         mapped
-      end
-
-      def method_missing(name, *args, &blk)
-        if @object.respond_to?(name)
-          @object.send(name, *args, &blk)
-        else
-          super
-        end
-      end
-
-      def respond_to_missing?(*args)
-        @object.respond_to?(*args) || super
       end
     end
   end
