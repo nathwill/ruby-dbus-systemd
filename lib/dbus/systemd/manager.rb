@@ -38,7 +38,7 @@ module DBus
       end
 
       def units
-        @object.ListUnits.first.map { |u| u[UNIT_INDICES[:name]] }
+        @object.ListUnits.first.map { |u| map_unit(u) }
       end
 
       def unit(name)
