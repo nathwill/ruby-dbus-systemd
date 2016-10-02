@@ -5,7 +5,7 @@ require_relative 'unit'
 module DBus
   module Systemd
     class Manager
-      OBJECT = '/org/freedesktop/systemd1'
+      NODE = '/org/freedesktop/systemd1'
       INTERFACE = 'org.freedesktop.systemd1.Manager'
 
       UNIT_INDICES = {
@@ -36,12 +36,12 @@ module DBus
 
       def initialize(bus = Systemd.system_bus)
         @service = bus.service(Systemd::INTERFACE)
-        @object = @service.object(OBJECT)
+        @object = @service.object(NODE)
                           .tap(&:introspect)
       end
 
       def units
-        @object.ListUnits.first.map { |u| map_unit(u) }
+        self.ListUnits.first.map { |u| map_unit(u) }
       end
 
       def unit(name)

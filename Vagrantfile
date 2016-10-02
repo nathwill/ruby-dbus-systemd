@@ -6,6 +6,6 @@ Vagrant.configure("2") do |config|
   config.vm.box_check_update = true
 
   config.vm.provision "shell", inline: <<-SHELL
-    dnf install -y git ruby rubygem-bundler
+    dnf install -y git ruby rubygem-bundler systemd-container btrfs-progs
   SHELL
 end
