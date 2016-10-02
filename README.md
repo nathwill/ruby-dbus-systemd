@@ -2,7 +2,7 @@
 
 Ruby library for simplifying access to systemd dbus interfaces.
 
-Recommanded Reading
+Recommended Reading
 
   - [systemd D-Bus specification](https://www.freedesktop.org/wiki/Software/systemd/dbus/)
   - [D-Bus specification](https://dbus.freedesktop.org/doc/dbus-specification.html)
