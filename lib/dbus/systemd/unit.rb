@@ -11,10 +11,6 @@ module DBus
         unit_path = manager.object.GetUnit(name).first
         @object = manager.service.object(unit_path).tap(&:introspect)
       end
-
-      def properties
-        @object.GetAll(INTERFACE).first
-      end
     end
   end
 end

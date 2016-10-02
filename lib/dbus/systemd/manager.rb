@@ -1,4 +1,5 @@
 require_relative '../systemd'
+require_relative 'unit'
 
 module DBus
   module Systemd
@@ -28,63 +29,54 @@ module DBus
         unit_object_path: 5
       }
 
-      attr_accessor :bus, :service, :object, :units
+      attr_accessor :service, :object
 
       def initialize(bus = DBus::Systemd.system_bus)
-        @bus = bus
-        refresh
-      end
-
-      def get_unit(unit_name)
-        Unit.new(unit_name, self)
-      end
-
-      def reset_failed
-        @object.ResetFailed
-      end
-
-      def reload
-        @object.Reload
-      end
-
-      def reexecute
-        @object.Reexecute
-      end
-
-      def exit
-        @object.Exit
-      end
-
-      def reboot
-        @object.Reboot
-      end
-
-      def power_off
-        @object.PowerOff
-      end
-
-      def halt
-        @object.Halt
-      end
-
-      def k_exec
-        @object.KExec
-      end
-
-      def properties
-        @object.GetAll(INTERFACE).first
-      end
-
-      def property(prop)
-        @object.Get(INTERFACE, prop)
-      end
-
-      def refresh
         @service = bus.service(DBus::Systemd::INTERFACE)
         @object = @service.object(OBJECT)
                           .tap(&:introspect)
-        @units = @object.ListUnits.first.map { |u| u[UNIT_INDICES[:name]] }
-        self
+      end
+
+      def units
+        @object.ListUnits.first.map { |u| u[UNIT_INDICES[:name]] }
+      end
+
+      def unit(name)
+        Unit.new(name, self)
+      end
+
+      def get_unit_by_object_path(path)
+        obj = @service.object(path).tap(&:introspect)
+        Unit.new(obj.Get(Unit::INTERFACE, 'Id').first, self)
+      end
+
+      def map_unit(unit_array)
+        mapped = {}
+
+        unit_array.each_with_index do |item, index|
+          mapped[UNIT_INDICES.key(index)] = item
+        end
+
+        mapped
+      end
+
+      def job(id)
+        Job.new(id, self)
+      end
+
+      def get_job_by_object_path(path)
+        obj = @service.object(path).tap(&:introspect)
+        Job.new(obj.Get(Job::INTERFACE, 'Id').first, self)
+      end
+
+      def map_job(job_array)
+        mapped = {}
+
+        job_array.each_with_index do |item, index|
+          mapped[JOB_INDICES.key(index)] = item
+        end
+
+        mapped
       end
     end
   end
