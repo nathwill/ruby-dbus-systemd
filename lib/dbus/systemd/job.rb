@@ -1,4 +1,5 @@
 require_relative 'method_missing'
+require_relative 'manager'
 
 module DBus
   module Systemd

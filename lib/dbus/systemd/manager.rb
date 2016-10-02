@@ -1,6 +1,6 @@
+require_relative 'method_missing'
 require_relative '../systemd'
 require_relative 'unit'
-require_relative 'method_missing'
 
 module DBus
   module Systemd
