@@ -32,7 +32,7 @@ module DBus
 
       include MethodMissing
 
-      attr_accessor :service, :object
+      attr_reader :service
 
       def initialize(bus = Systemd.system_bus)
         @service = bus.service(Systemd::INTERFACE)

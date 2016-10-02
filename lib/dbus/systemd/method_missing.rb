@@ -1,6 +1,8 @@
 module DBus
   module Systemd
     module MethodMissing
+      attr_reader :object
+
       def method_missing(name, *args, &blk)
         if @object.respond_to?(name)
           @object.send(name, *args, &blk)

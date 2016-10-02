@@ -9,7 +9,7 @@ module DBus
       include MethodMissing
 
       def initialize(id, manager = Manager.new)
-        job_path = manager.object.GetJob(id).first
+        job_path = manager.GetJob(id).first
         @object = manager.service.object(job_path)
                                  .tap(&:introspect)
       end

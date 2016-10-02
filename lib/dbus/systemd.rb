@@ -1,9 +1,4 @@
-require_relative "systemd/version"
-require_relative "systemd/manager"
-require_relative "systemd/unit"
-require_relative "systemd/job"
-
-require "dbus"
+require 'dbus'
 
 module DBus
   module Systemd
@@ -20,3 +15,8 @@ module DBus
     module_function :system_bus, :session_bus
   end
 end
+
+require_relative 'systemd/version'
+require_relative 'systemd/manager'
+require_relative 'systemd/unit'
+require_relative 'systemd/job'
