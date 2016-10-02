@@ -46,7 +46,8 @@ module DBus
       end
 
       def get_unit_by_object_path(path)
-        obj = @service.object(path).tap(&:introspect)
+        obj = @service.object(path)
+                      .tap(&:introspect)
         Unit.new(obj.Get(Unit::INTERFACE, 'Id').first, self)
       end
 
@@ -65,7 +66,8 @@ module DBus
       end
 
       def get_job_by_object_path(path)
-        obj = @service.object(path).tap(&:introspect)
+        obj = @service.object(path)
+                      .tap(&:introspect)
         Job.new(obj.Get(Job::INTERFACE, 'Id').first, self)
       end
 
