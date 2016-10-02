@@ -1,0 +1,9 @@
+~~systemd: https://www.freedesktop.org/wiki/Software/systemd/dbus/~~
+logind: https://www.freedesktop.org/wiki/Software/systemd/logind/
+machined: https://www.freedesktop.org/wiki/Software/systemd/machined/
+importd: https://wiki.freedesktop.org/www/Software/systemd/importd/
+hostnamed: https://www.freedesktop.org/wiki/Software/systemd/hostnamed/
+localed: https://www.freedesktop.org/wiki/Software/systemd/localed/
+timedated: https://www.freedesktop.org/wiki/Software/systemd/timedated/
+networkd: ??
+resolved: https://www.freedesktop.org/wiki/Software/systemd/resolved/
