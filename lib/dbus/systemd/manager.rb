@@ -1,6 +1,7 @@
-require_relative 'method_missing'
-require_relative '../systemd'
+require_relative 'helpers'
+require_relative 'mixin'
 require_relative 'unit'
+require_relative 'job'
 
 module DBus
   module Systemd
@@ -30,12 +31,12 @@ module DBus
         unit_object_path: 5
       }
 
-      include MethodMissing
+      include Mixin::MethodMissing
 
       attr_reader :service
 
-      def initialize(bus = Systemd.system_bus)
-        @service = bus.service(Systemd::INTERFACE)
+      def initialize(bus = Systemd::Helpers.system_bus)
+        @service = bus.service(INTERFACE)
         @object = @service.object(NODE)
                           .tap(&:introspect)
       end
@@ -55,13 +56,7 @@ module DBus
       end
 
       def map_unit(unit_array)
-        mapped = {}
-
-        unit_array.each_with_index do |item, index|
-          mapped[UNIT_INDICES.key(index)] = item
-        end
-
-        mapped
+        Helpers.map_array(unit_array, UNIT_INDICES)
       end
 
       def job(id)
@@ -75,13 +70,7 @@ module DBus
       end
 
       def map_job(job_array)
-        mapped = {}
-
-        job_array.each_with_index do |item, index|
-          mapped[JOB_INDICES.key(index)] = item
-        end
-
-        mapped
+        Helpers.map_array(job_array, JOB_INDICES)
       end
     end
   end

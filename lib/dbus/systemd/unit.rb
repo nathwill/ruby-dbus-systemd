@@ -1,12 +1,12 @@
-require_relative 'method_missing'
 require_relative 'manager'
+require_relative 'mixin'
 
 module DBus
   module Systemd
     class Unit
       INTERFACE = 'org.freedesktop.systemd1.Unit'
 
-      include MethodMissing
+      include Mixin::MethodMissing
 
       def initialize(name, manager = Manager.new)
         unit_path = manager.GetUnit(name).first

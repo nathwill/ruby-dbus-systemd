@@ -1,5 +1,5 @@
-require_relative '../systemd/method_missing'
-require_relative '../systemd/bus'
+require_relative '../systemd/helpers'
+require_relative '../systemd/mixin'
 require_relative 'transfer'
 
 module DBus
@@ -17,12 +17,12 @@ module DBus
         object_path: 5
       }
 
-      include DBus::Systemd::MethodMissing
+      include DBus::Systemd::Mixin::MethodMissing
 
       attr_reader :service
 
-      def initialize(bus = Systemd::Bus.system_bus)
-        @service = bus.service(Importd::INTERFACE)
+      def initialize(bus = Systemd::Helpers.system_bus)
+        @service = bus.service(INTERFACE)
         @object = @service.object(NODE)
                           .tap(&:introspect)
       end
@@ -42,13 +42,7 @@ module DBus
       end
 
       def map_transfer(transfer_array)
-        mapped = {}
-
-        transfer_array.each_with_index do |item, index|
-          mapped[TRANSFER_INDICES.key(index)] = item
-        end
-
-        mapped
+        Systemd::Helpers.map_array(transfer_array, TRANSFER_INDICES)
       end
     end
   end
