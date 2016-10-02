@@ -5,6 +5,8 @@ require_relative 'job'
 
 module DBus
   module Systemd
+    INTERFACE = 'org.freedesktop.systemd1'
+
     class Manager
       NODE = '/org/freedesktop/systemd1'
       INTERFACE = 'org.freedesktop.systemd1.Manager'
@@ -36,7 +38,7 @@ module DBus
       attr_reader :service
 
       def initialize(bus = Systemd::Helpers.system_bus)
-        @service = bus.service(INTERFACE)
+        @service = bus.service(Systemd::INTERFACE)
         @object = @service.object(NODE)
                           .tap(&:introspect)
       end

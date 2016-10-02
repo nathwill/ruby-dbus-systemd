@@ -4,6 +4,8 @@ require_relative 'transfer'
 
 module DBus
   module Importd
+    INTERFACE = 'org.freedesktop.import1'
+
     class Manager
       NODE = '/org/freedesktop/import1'
       INTERFACE = 'org.freedesktop.import1.Manager'
@@ -22,7 +24,7 @@ module DBus
       attr_reader :service
 
       def initialize(bus = Systemd::Helpers.system_bus)
-        @service = bus.service(INTERFACE)
+        @service = bus.service(Importd::INTERFACE)
         @object = @service.object(NODE)
                           .tap(&:introspect)
       end

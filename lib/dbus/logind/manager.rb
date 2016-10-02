@@ -6,6 +6,8 @@ require_relative 'seat'
 
 module DBus
   module Logind
+    INTERFACE = 'org.freedesktop.login1'
+
     class Manager
       NODE = '/org/freedesktop/login1'
       INTERFACE = 'org.freedesktop.login1.Manager'
@@ -43,7 +45,7 @@ module DBus
       attr_reader :service
 
       def initialize(bus = Systemd::Helpers.system_bus)
-        @service = bus.service(INTERFACE)
+        @service = bus.service(Logind::INTERFACE)
         @object = @service.object(NODE)
                           .tap(&:introspect)
       end
@@ -54,6 +56,12 @@ module DBus
 
       def seat(id)
         Seat.new(id, self)
+      end
+
+      def get_seat_by_path(path)
+        obj = @service.object(path)
+                      .tap(&:introspect)
+        Seat.new(obj.Get(Seat::INTERFACE, 'Id').first, self)
       end
 
       def map_seat(seat_array)
@@ -68,6 +76,12 @@ module DBus
         Session.new(id, self)
       end
 
+      def get_session_by_path(path)
+        obj = @service.object(path)
+                      .tap(&:introspect)
+        Session.new(obj.Get(Session::INTERFACE, 'Id').first, self)
+      end
+
       def map_session(session_array)
         Systemd::Helpers.map_array(session_array, SESSION_INDICES)
       end
@@ -78,6 +92,12 @@ module DBus
 
       def user(id)
         User.new(id, self)
+      end
+
+      def get_user_by_path(path)
+        obj = @service.object(path)
+                      .tap(&:introspect)
+        User.new(obj.Get(User::INTERFACE, 'Id').first, self)
       end
 
       def map_user(user_array)

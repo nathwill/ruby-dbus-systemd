@@ -9,7 +9,7 @@ module DBus
       include DBus::Systemd::Mixin::MethodMissing
 
       def initialize(id, manager = Manager.new)
-        @object = manager.service.object("#{Importd::Node}/transfer/_#{id}")
+        @object = manager.service.object("#{Manager::NODE}/transfer/_#{id}")
                                  .tap(&:introspect)
       end
     end

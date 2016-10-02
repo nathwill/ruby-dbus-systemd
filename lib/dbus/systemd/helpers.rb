@@ -1,3 +1,5 @@
+require 'dbus'
+
 module DBus
   module Systemd
     module Helpers
