@@ -124,6 +124,55 @@ irb(main):032:0> machine.GetAll(DBus::Systemd::Machined::Machine::INTERFACE).fir
 => {"Name"=>".host", "Id"=>[77, 46, 68, 242, 105, 232, 78, 52, 157, 152, 76, 171, 175, 145, 140, 130], "Timestamp"=>1475451915747985, "TimestampMonotonic"=>0, "Service"=>"", "Unit"=>"-.slice", "Leader"=>1, "Class"=>"host", "RootDirectory"=>"/", "NetworkInterfaces"=>[], "State"=>"running"}
 ```
 
+### DBus::Systemd::Networkd
+
+There's not really documentation published for this, but some busctl work will show you what's available.
+
+e.g....
+
+```bash
+[root@localhost vagrant]# busctl introspect org.freedesktop.network1 /org/freedesktop/network1
+NAME                                TYPE      SIGNATURE RESULT/VALUE FLAGS
+org.freedesktop.DBus.Introspectable interface -         -            -
+.Introspect                         method    -         s            -
+org.freedesktop.DBus.Peer           interface -         -            -
+.GetMachineId                       method    -         s            -
+.Ping                               method    -         -            -
+org.freedesktop.DBus.Properties     interface -         -            -
+.Get                                method    ss        v            -
+.GetAll                             method    s         a{sv}        -
+.Set                                method    ssv       -            -
+.PropertiesChanged                  signal    sa{sv}as  -            -
+org.freedesktop.network1.Manager    interface -         -            -
+.OperationalState                   property  s         "routable"   emits-change
+[root@localhost vagrant]# busctl introspect org.freedesktop.network1 /org/freedesktop/network1/link/1
+NAME                                TYPE      SIGNATURE RESULT/VALUE FLAGS
+org.freedesktop.DBus.Introspectable interface -         -            -
+.Introspect                         method    -         s            -
+org.freedesktop.DBus.Peer           interface -         -            -
+.GetMachineId                       method    -         s            -
+.Ping                               method    -         -            -
+org.freedesktop.DBus.Properties     interface -         -            -
+.Get                                method    ss        v            -
+.GetAll                             method    s         a{sv}        -
+.Set                                method    ssv       -            -
+.PropertiesChanged                  signal    sa{sv}as  -            -
+org.freedesktop.network1.Link       interface -         -            -
+.AdministrativeState                property  s         "unmanaged"  emits-change
+.OperationalState                   property  s         "carrier"    emits-change
+```
+
+```ruby
+irb(main):003:0> nm = DBus::Systemd::Networkd::Manager.new
+=> ...
+irb(main):004:0> nm.properties
+=> {"OperationalState"=>"routable"}
+irb(main):003:0> l = nm.link(1)
+=> ...
+irb(main):004:0> l.properties
+=> {"OperationalState"=>"carrier", "AdministrativeState"=>"unmanaged"}
+```
+
 ### DBus::Systemd::Resolved
 
 For full docs, see [official docs](https://www.freedesktop.org/wiki/Software/systemd/resolved/).
