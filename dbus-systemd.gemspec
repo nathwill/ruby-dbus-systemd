@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["nath.e.will@gmail.com"]
 
   spec.summary       = 'library for interfacing with systemd over dbus'
-  spec.description   = spec.summary
+  spec.description   = IO.read(File.join(File.dirname(__FILE__), 'README.md'))
   spec.homepage      = "https://github.com/nathwill/ruby-dbus-systemd"
   spec.license       = "MIT"
 

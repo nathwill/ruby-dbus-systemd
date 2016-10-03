@@ -10,7 +10,7 @@ module DBus
 
       def initialize(id, manager = Manager.new)
         user_path = manager.GetUser(id).first
-        @object = manager.service.object(seat_path)
+        @object = manager.service.object(user_path)
                                  .tap(&:introspect)
       end
     end
