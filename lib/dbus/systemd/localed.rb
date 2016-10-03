@@ -11,7 +11,7 @@ module DBus
 
       attr_reader :service
 
-      def initialize(bus = Systemd::Helpers.system_bus)
+      def initialize(bus = Helpers.system_bus)
         @service = bus.service(INTERFACE)
         @object = @service.object(NODE)
                           .tap(&:introspect)
