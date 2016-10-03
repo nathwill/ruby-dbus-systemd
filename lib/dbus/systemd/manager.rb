@@ -1,3 +1,7 @@
+#
+# See docs for full API description:
+# https://www.freedesktop.org/wiki/Software/systemd/dbus/
+#
 require_relative 'helpers'
 require_relative 'mixin'
 require_relative 'unit'
@@ -59,6 +63,10 @@ module DBus
 
       def map_unit(unit_array)
         Helpers.map_array(unit_array, UNIT_INDICES)
+      end
+
+      def jobs
+        self.ListJobs.first.map { |j| map_job(j) }
       end
 
       def job(id)

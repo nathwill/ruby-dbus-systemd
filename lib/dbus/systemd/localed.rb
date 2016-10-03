@@ -1,3 +1,7 @@
+#
+# See docs for full API description:
+# https://www.freedesktop.org/wiki/Software/systemd/localed/
+#
 require_relative 'helpers'
 require_relative 'mixin'
 
