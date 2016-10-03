@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["nath.e.will@gmail.com"]
 
   spec.summary       = 'systemd D-Bus API library'
-  spec.description   = 'library for interfacing with systemd's D-Bus APIs' 
+  spec.description   = 'library for interfacing with systemd D-Bus APIs'
   spec.homepage      = "https://github.com/nathwill/ruby-dbus-systemd"
   spec.license       = "MIT"
 
