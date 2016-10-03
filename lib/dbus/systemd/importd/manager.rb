@@ -15,7 +15,7 @@ module DBus
           id: 0,
           operation: 1,
           remote_file: 2,
-          machine_name: 3,
+          image_name: 3,
           progress: 4,
           object_path: 5
         }
