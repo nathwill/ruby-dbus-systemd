@@ -2,6 +2,9 @@
 
 Ruby library for simplifying access to systemd dbus interfaces.
 
+*Huge* thanks to the [ruby-dbus](https://rubygems.org/gems/ruby-dbus) library,
+without which this would have been awful to write.
+
 Recommended Reading
 
   - [introduction to d-bus concepts section of sd-bus announcement blog post](http://0pointer.net/blog/the-new-sd-bus-api-of-systemd.html)
