@@ -8,6 +8,7 @@ module DBus
         INTERFACE = 'org.freedesktop.import1.Transfer'
 
         include Systemd::Mixin::MethodMissing
+        include Systemd::Mixin::Properties
 
         def initialize(id, manager = Manager.new)
           @object = manager.service.object("#{Manager::NODE}/transfer/_#{id}")

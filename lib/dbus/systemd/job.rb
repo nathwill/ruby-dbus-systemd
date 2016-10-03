@@ -7,6 +7,7 @@ module DBus
       INTERFACE = 'org.freedesktop.systemd1.Job'
 
       include Mixin::MethodMissing
+      include Mixin::Properties
 
       def initialize(id, manager = Manager.new)
         job_path = manager.GetJob(id).first

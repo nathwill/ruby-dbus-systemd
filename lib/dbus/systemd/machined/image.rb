@@ -8,6 +8,7 @@ module DBus
         INTERFACE = 'org.freedesktop.machine1.Image'
 
         include Systemd::Mixin::MethodMissing
+        include Systemd::Mixin::Properties
 
         def initialize(name, manager = Manager.new)
           image_path = manager.GetImage(name).first

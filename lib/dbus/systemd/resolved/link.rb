@@ -8,6 +8,7 @@ module DBus
         INTERFACE = 'org.freedesktop.resolve1.Link'
 
         include Systemd::Mixin::MethodMissing
+        include Systemd::Mixin::Properties
 
         def initialize(id, manager = Manager.new)
           link_path = manager.GetLink(id).first

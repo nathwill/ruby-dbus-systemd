@@ -7,6 +7,7 @@ module DBus
       INTERFACE = 'org.freedesktop.systemd1.Unit'
 
       include Mixin::MethodMissing
+      include Mixin::Properties
 
       def initialize(name, manager = Manager.new)
         unit_path = manager.GetUnit(name).first

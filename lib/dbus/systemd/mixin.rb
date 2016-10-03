@@ -16,6 +16,12 @@ module DBus
           @object.respond_to?(*args) || super
         end
       end
+
+      module Properties
+        def properties(interface = self.class::INTERFACE)
+          self.GetAll(interface).first
+        end
+      end
     end
   end
 end

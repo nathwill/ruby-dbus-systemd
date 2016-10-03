@@ -8,6 +8,7 @@ module DBus
         INTERFACE = 'org.freedesktop.login1.User'
 
         include Systemd::Mixin::MethodMissing
+        include Systemd::Mixin::Properties
 
         def initialize(id, manager = Manager.new)
           user_path = manager.GetUser(id).first

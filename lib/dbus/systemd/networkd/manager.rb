@@ -4,12 +4,12 @@ require_relative 'link'
 
 module DBus
   module Systemd
-    module Resolved
-      INTERFACE = 'org.freedesktop.resolve1'
+    module Networkd
+      INTERFACE = 'org.freedesktop.network1'
 
       class Manager
-        NODE = '/org/freedesktop/resolve1'
-        INTERFACE = 'org.freedesktop.resolve1.Manager'
+        NODE = '/org/freedesktop/network1'
+        INTERFACE = 'org.freedesktop.network1.Manager'
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties
@@ -17,9 +17,13 @@ module DBus
         attr_reader :service
 
         def initialize(bus = Systemd::Helpers.system_bus)
-          @service = bus.service(Resolved::INTERFACE)
+          @service = bus.service(Networkd::INTERFACE)
           @object = @service.object(NODE)
                             .tap(&:introspect)
+        end
+
+        def link(id)
+          Link.new(id, self)
         end
       end
     end

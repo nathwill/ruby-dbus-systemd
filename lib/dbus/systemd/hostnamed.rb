@@ -12,6 +12,7 @@ module DBus
       INTERFACE = 'org.freedesktop.hostname1'
 
       include Mixin::MethodMissing
+      include Mixin::Properties
 
       attr_reader :service
 

@@ -3,16 +3,15 @@ require_relative 'manager'
 
 module DBus
   module Systemd
-    module Logind
-      class Seat
-        INTERFACE = 'org.freedesktop.login1.Seat'
+    module Networkd
+      class Link
+        INTERFACE = 'org.freedesktop.network1.Link'
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties
 
         def initialize(id, manager = Manager.new)
-          seat_path = manager.GetSeat(id).first
-          @object = manager.service.object(seat_path)
+          @object = manager.service.object("#{Manager::NODE}/link/#{id}")
                                    .tap(&:introspect)
         end
       end

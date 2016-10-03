@@ -21,6 +21,7 @@ module DBus
         }
 
         include Systemd::Mixin::MethodMissing
+        include Systemd::Mixin::Properties
 
         attr_reader :service
 

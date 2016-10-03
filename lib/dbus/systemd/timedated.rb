@@ -8,6 +8,7 @@ module DBus
       INTERFACE = 'org.freedesktop.timedate1'
 
       include Mixin::MethodMissing
+      include Mixin::Properties
 
       attr_reader :service
 
