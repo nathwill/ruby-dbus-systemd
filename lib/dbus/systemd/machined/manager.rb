@@ -26,12 +26,17 @@ require_relative 'image'
 module DBus
   module Systemd
     module Machined
+      # machined dbus interface
       INTERFACE = 'org.freedesktop.machine1'.freeze
 
       class Manager
+        # machined manager dbus object node path
         NODE = '/org/freedesktop/machine1'.freeze
+
+        # machined manager dbus interface
         INTERFACE = 'org.freedesktop.machine1.Manager'.freeze
 
+        # machine array index map as returned by ListMachines
         MACHINE_INDICES = {
           name: 0,
           class: 1,
@@ -39,6 +44,7 @@ module DBus
           object_path: 3
         }.freeze
 
+        # image array index map as returned by ListImages
         IMAGE_INDICES = {
           name: 0,
           type: 1,
@@ -52,46 +58,90 @@ module DBus
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties
 
+        # @return [DBus::Service]
+        # @api private
         attr_reader :service
 
+        #
+        # Create machined Manager dbus proxy object
+        #
+        # @param bus [DBus::SystemBus, DBus::SessionBus] dbus instance
         def initialize(bus = Systemd::Helpers.system_bus)
           @service = bus.service(Machined::INTERFACE)
           @object = @service.object(NODE)
                             .tap(&:introspect)
         end
 
+        #
+        # array of machines with mapped properties
+        #
+        # @return [Array] array of machine property hashes
         def machines
           self.ListMachines.first.map { |m| map_machine(m) }
         end
 
+        #
+        # get machine dbus proxy object by machine name
+        #
+        # @param name [String] machine name
+        # @return [DBus::Systemd::Machined::Machine] machine instance
         def machine(name)
           Machine.new(name, self)
         end
 
+        #
+        # get machine dbus proxy object by dbus node path
+        #
+        # @param path [String] machine dbus node path
+        # @return [DBus::Systemd::Machined::Machine] machine instance
         def get_machine_by_path(path)
           obj = @service.object(path)
                         .tap(&:introspect)
           Machine.new(obj.Get(Machine::INTERFACE, 'Name').first, self)
         end
 
+        #
+        # map machine property array from ListMachines to indexed property hash
+        #
+        # @param machine_array [Array] machine property array as returned by ListMachines
+        # @return [Hash] hash containing mapped machine properties
         def map_machine(machine_array)
           Systemd::Helpers.map_array(machine_array, MACHINE_INDICES)
         end
 
+        #
+        # get mapped array of images
+        #
+        # @return [Array] array of mapped image property hashes
         def images
           self.ListImages.first.map { |i| map_image(i) }
         end
 
+        #
+        # get image proxy object by name
+        #
+        # @param name [String] image name
+        # @return [DBus::Systemd::Machined::Machine] image dbus proxy object
         def image(name)
           Image.new(name, self)
         end
 
+        #
+        # get image dbus proxy object by dbus node path
+        #
+        # @param path [String] image dbus node path
+        # @return [DBus::Systemd::Machined::Image] image dbus proxy object
         def get_image_by_path(path)
           obj = @service.object(path)
                         .tap(&:introspect)
           Image.new(obj.Get(Image::INTERFACE, 'Name').first, self)
         end
 
+        #
+        # map image array as returned by ListImages to property hash
+        #
+        # @param image_array [Array] image property array as returned by ListImages
+        # @return [Hash] image property hash
         def map_image(image_array)
           Systemd::Helpers.map_array(image_array, IMAGE_INDICES)
         end

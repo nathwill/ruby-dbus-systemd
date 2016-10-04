@@ -24,11 +24,17 @@ require_relative 'mixin'
 module DBus
   module Systemd
     class Unit
+      # the unit dbus interface
       INTERFACE = 'org.freedesktop.systemd1.Unit'.freeze
 
       include Mixin::MethodMissing
       include Mixin::Properties
 
+      #
+      # create a new unit object for interfacing with systemd units
+      #
+      # @param name [String] unit name
+      # @param manager [DBus::Systemd::Manager] systemd manager object
       def initialize(name, manager = Manager.new)
         unit_path = manager.GetUnit(name).first
         @object = manager.service.object(unit_path)

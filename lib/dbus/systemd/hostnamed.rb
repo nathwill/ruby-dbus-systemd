@@ -28,14 +28,24 @@ require_relative 'mixin'
 module DBus
   module Systemd
     class Hostnamed
+      # the hostnamed dbus node path
       NODE = '/org/freedesktop/hostname1'.freeze
+
+      # the hostnamed dbus interface
       INTERFACE = 'org.freedesktop.hostname1'.freeze
 
       include Mixin::MethodMissing
       include Mixin::Properties
 
+      # @return [DBus::Service]
+      # @api private
       attr_reader :service
 
+      #
+      # Creates a new Hostnamed object for interfacing
+      # with hostnamed on the given bus
+      #
+      # @param bus [DBus::SystemBus, DBus::SessionBus] dbus instance
       def initialize(bus = Helpers.system_bus)
         @service = bus.service(INTERFACE)
         @object = @service.object(NODE)

@@ -25,11 +25,17 @@ module DBus
   module Systemd
     module Logind
       class Seat
+        # logind seat object dbus interface
         INTERFACE = 'org.freedesktop.login1.Seat'.freeze
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties
 
+        #
+        # create a new logind seat dbus object
+        #
+        # @param id [String] logind seat id
+        # @param manager [DBus::Systemd::Logind::Manager] logind manager object
         def initialize(id, manager = Manager.new)
           seat_path = manager.GetSeat(id).first
           @object = manager.service.object(seat_path)

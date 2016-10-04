@@ -24,7 +24,10 @@ require_relative 'mixin'
 module DBus
   module Systemd
     class Timedated
+      # the timedated dbus node path
       NODE = '/org/freedesktop/timedate1'.freeze
+
+      # the timedated dbus interface
       INTERFACE = 'org.freedesktop.timedate1'.freeze
 
       include Mixin::MethodMissing
@@ -32,6 +35,10 @@ module DBus
 
       attr_reader :service
 
+      #
+      # Create a new object for interfacing with timedated
+      #
+      # @param bus [DBus::SystemBus, DBus::SessionBus] dbus instance
       def initialize(bus = Helpers.system_bus)
         @service = bus.service(INTERFACE)
         @object = @service.object(NODE)

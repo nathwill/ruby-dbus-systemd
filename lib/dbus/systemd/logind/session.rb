@@ -25,11 +25,17 @@ module DBus
   module Systemd
     module Logind
       class Session
+        # logind session object dbus interface
         INTERFACE = 'org.freedesktop.login1.Session'.freeze
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties
 
+        #
+        # create logind session dbus proxy object
+        #
+        # @param id [String] logind session id
+        # @param manager [DBus::Systemd::Logind::Manager] logind manager object
         def initialize(id, manager = Manager.new)
           session_path = manager.GetSession(id).first
           @object = manager.service.object(session_path)

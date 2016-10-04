@@ -23,14 +23,28 @@ require 'dbus'
 module DBus
   module Systemd
     module Helpers
+      #
+      # get an instance of the system bus
+      #
+      # @return [DBus::SystemBus]
       def system_bus
         DBus::SystemBus.instance
       end
 
+      #
+      # get an instance of the session bus
+      #
+      # @return [DBus::SessionBus]
       def session_bus
         DBus::SessionBus.instance
       end
 
+      #
+      # map an array to a hash from an index map
+      #
+      # @param array [Array] array to be mapped
+      # @param map [Hash] map of positional elements to array indices
+      # @return [Hash] hash with keys from map and values from array
       def map_array(array, map)
         mapped = {}
 

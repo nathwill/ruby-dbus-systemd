@@ -22,8 +22,14 @@ module DBus
   module Systemd
     module Mixin
       module MethodMissing
+        # @return DBus::ProxyObject
+        # @api private
         attr_reader :object
 
+        #
+        # use method_missing to proxy methods to
+        # the dbus proxy object interface methods
+        #
         def method_missing(name, *args, &blk)
           if @object.respond_to?(name)
             @object.send(name, *args, &blk)
@@ -32,12 +38,20 @@ module DBus
           end
         end
 
+        #
+        # fix respond_to to also check the dbus methods
+        #
         def respond_to_missing?(*args)
           @object.respond_to?(*args) || super
         end
       end
 
       module Properties
+        #
+        # fetches properties from a named interface
+        #
+        # @param interface [String], interface to get properties from
+        # @return [Hash] interface property hash
         def properties(interface = self.class::INTERFACE)
           self.GetAll(interface).first
         end

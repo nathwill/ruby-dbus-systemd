@@ -25,11 +25,17 @@ module DBus
   module Systemd
     module Importd
       class Transfer
+        # importd transfer object dbus interface
         INTERFACE = 'org.freedesktop.import1.Transfer'.freeze
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties
 
+        #
+        # create a transfer object for interfacing with importd transfers
+        #
+        # @param id [Integer] transfer id
+        # @param manager [DBus::Systemd::Importd::Manager] the importd manager object
         def initialize(id, manager = Manager.new)
           @object = manager.service.object("#{Manager::NODE}/transfer/_#{id}")
                            .tap(&:introspect)

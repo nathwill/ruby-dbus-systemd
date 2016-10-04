@@ -24,11 +24,17 @@ require_relative 'mixin'
 module DBus
   module Systemd
     class Job
+      # systemd job object dbus interface
       INTERFACE = 'org.freedesktop.systemd1.Job'.freeze
 
       include Mixin::MethodMissing
       include Mixin::Properties
 
+      #
+      # Creates a job object for interfacing with a systemd job
+      #
+      # @param id [Integer] the job id
+      # @param manager [DBus::Systemd::Manager] the systemd manager to query
       def initialize(id, manager = Manager.new)
         job_path = manager.GetJob(id).first
         @object = manager.service.object(job_path)

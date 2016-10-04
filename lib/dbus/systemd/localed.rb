@@ -28,14 +28,23 @@ require_relative 'mixin'
 module DBus
   module Systemd
     class Localed
+      # the localed object dbus node path
       NODE = '/org/freedesktop/locale1'.freeze
+
+      # the localed object dbus interface
       INTERFACE = 'org.freedesktop.locale1'.freeze
 
       include Mixin::MethodMissing
       include Mixin::Properties
 
+      # @return [DBus::Service]
+      # @api private
       attr_reader :service
 
+      #
+      # Create a new DBus::Systemd::Localed object
+      #
+      # @param bus [DBus::SystemBus, DBus::SessionBus] the bus instance
       def initialize(bus = Helpers.system_bus)
         @service = bus.service(INTERFACE)
         @object = @service.object(NODE)

@@ -25,12 +25,17 @@ require_relative 'transfer'
 module DBus
   module Systemd
     module Importd
+      # the importd dbus interface
       INTERFACE = 'org.freedesktop.import1'.freeze
 
       class Manager
+        # the importd manager dbus node path
         NODE = '/org/freedesktop/import1'.freeze
+
+        # the importd manager dbus interface
         INTERFACE = 'org.freedesktop.import1.Manager'.freeze
 
+        # index mapping of transfer array returned from ListTransfers()
         TRANSFER_INDICES = {
           id: 0,
           operation: 1,
@@ -43,28 +48,55 @@ module DBus
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties
 
+        # @return [DBus::Service]
+        # @api private
         attr_reader :service
 
+        #
+        # Creates a new Manager object for interfacing with
+        # the hostnamed Manager interface
+        #
+        # @param bus [DBus::SystemBus, DBus::SessionBus] dbus instance
         def initialize(bus = Systemd::Helpers.system_bus)
           @service = bus.service(Importd::INTERFACE)
           @object = @service.object(NODE)
                             .tap(&:introspect)
         end
 
+        #
+        # return a list of mapped transfers
+        #
+        # @return [Array] array of hashes with transfer data
         def transfers
           self.ListTransfers.first.map { |t| map_transfer(t) }
         end
 
+        #
+        # Create a transfer object from a transfer id
+        #
+        # @param id [Integer] transfer id
+        # @return [DBus::Systemd::Importd::Transfer] importd transfer object
         def transfer(id)
           Transfer.new(id, self)
         end
 
+        #
+        # Create a transfer object from the transfer node path
+        #
+        # @param path [String] transfer dbus node path
+        # @return [DBus::Systemd::Importd::Transfer] importd transfer object
         def get_transfer_by_path(path)
           obj = @service.object(path)
                         .tap(&:introspect)
           Transfer.new(obj.Get(Transfer::INTERFACE, 'Id').first, self)
         end
 
+        #
+        # map a transfer array as returned from ListTransfers
+        # to a hash with keys from TRANSER_INDICES
+        #
+        # @param transfer_array [Array] a transfer array
+        # @return [Hash] mapped transfer array to named fields
         def map_transfer(transfer_array)
           Systemd::Helpers.map_array(transfer_array, TRANSFER_INDICES)
         end

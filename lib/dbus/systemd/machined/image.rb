@@ -25,11 +25,17 @@ module DBus
   module Systemd
     module Machined
       class Image
+        # machined image object dbus interface
         INTERFACE = 'org.freedesktop.machine1.Image'.freeze
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties
 
+        #
+        # Create a machined image dbus proxy object
+        #
+        # @param name [String] image name
+        # @param manager [DBus::Systemd::Machined::Manager] manager dbus proxy object
         def initialize(name, manager = Manager.new)
           image_path = manager.GetImage(name).first
           @object = manager.service.object(image_path)

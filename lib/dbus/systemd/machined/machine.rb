@@ -25,11 +25,17 @@ module DBus
   module Systemd
     module Machined
       class Machine
+        # machined machine object dbus interface
         INTERFACE = 'org.freedesktop.machine1.Machine'.freeze
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties
 
+        #
+        # create machined machine dbus proxy object
+        #
+        # @param name [String] machine name
+        # @param manager [DBus::Systemd::Machined::Manager] machined manager object
         def initialize(name, manager = Manager.new)
           machine_path = manager.GetMachine(name).first
           @object = manager.service.object(machine_path)
