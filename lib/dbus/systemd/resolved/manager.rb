@@ -25,11 +25,11 @@ require_relative 'link'
 module DBus
   module Systemd
     module Resolved
-      INTERFACE = 'org.freedesktop.resolve1'
+      INTERFACE = 'org.freedesktop.resolve1'.freeze
 
       class Manager
-        NODE = '/org/freedesktop/resolve1'
-        INTERFACE = 'org.freedesktop.resolve1.Manager'
+        NODE = '/org/freedesktop/resolve1'.freeze
+        INTERFACE = 'org.freedesktop.resolve1.Manager'.freeze
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties

@@ -23,7 +23,7 @@ require_relative '../unit'
 module DBus::Systemd
   class Unit
     class Socket < Unit
-      INTERFACE = 'org.freedesktop.systemd1.Socket'
+      INTERFACE = 'org.freedesktop.systemd1.Socket'.freeze
     end
   end
 end

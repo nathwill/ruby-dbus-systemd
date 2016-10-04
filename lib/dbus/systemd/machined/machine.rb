@@ -25,7 +25,7 @@ module DBus
   module Systemd
     module Machined
       class Machine
-        INTERFACE = 'org.freedesktop.machine1.Machine'
+        INTERFACE = 'org.freedesktop.machine1.Machine'.freeze
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties
@@ -33,7 +33,7 @@ module DBus
         def initialize(name, manager = Manager.new)
           machine_path = manager.GetMachine(name).first
           @object = manager.service.object(machine_path)
-                                   .tap(&:introspect)
+                           .tap(&:introspect)
         end
       end
     end

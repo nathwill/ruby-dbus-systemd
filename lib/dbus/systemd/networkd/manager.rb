@@ -25,11 +25,11 @@ require_relative 'link'
 module DBus
   module Systemd
     module Networkd
-      INTERFACE = 'org.freedesktop.network1'
+      INTERFACE = 'org.freedesktop.network1'.freeze
 
       class Manager
-        NODE = '/org/freedesktop/network1'
-        INTERFACE = 'org.freedesktop.network1.Manager'
+        NODE = '/org/freedesktop/network1'.freeze
+        INTERFACE = 'org.freedesktop.network1.Manager'.freeze
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties

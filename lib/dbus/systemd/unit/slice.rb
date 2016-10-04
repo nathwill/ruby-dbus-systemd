@@ -23,7 +23,7 @@ require_relative '../unit'
 module DBus::Systemd
   class Unit
     class Slice < Unit
-      INTERFACE = 'org.freedesktop.systemd1.Slice'
+      INTERFACE = 'org.freedesktop.systemd1.Slice'.freeze
     end
   end
 end

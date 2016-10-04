@@ -28,8 +28,8 @@ require_relative 'mixin'
 module DBus
   module Systemd
     class Hostnamed
-      NODE = '/org/freedesktop/hostname1'
-      INTERFACE = 'org.freedesktop.hostname1'
+      NODE = '/org/freedesktop/hostname1'.freeze
+      INTERFACE = 'org.freedesktop.hostname1'.freeze
 
       include Mixin::MethodMissing
       include Mixin::Properties

@@ -24,7 +24,7 @@ require_relative 'mixin'
 module DBus
   module Systemd
     class Job
-      INTERFACE = 'org.freedesktop.systemd1.Job'
+      INTERFACE = 'org.freedesktop.systemd1.Job'.freeze
 
       include Mixin::MethodMissing
       include Mixin::Properties
@@ -32,7 +32,7 @@ module DBus
       def initialize(id, manager = Manager.new)
         job_path = manager.GetJob(id).first
         @object = manager.service.object(job_path)
-                                 .tap(&:introspect)
+                         .tap(&:introspect)
       end
     end
   end

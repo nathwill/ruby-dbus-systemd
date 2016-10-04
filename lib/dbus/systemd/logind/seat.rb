@@ -25,7 +25,7 @@ module DBus
   module Systemd
     module Logind
       class Seat
-        INTERFACE = 'org.freedesktop.login1.Seat'
+        INTERFACE = 'org.freedesktop.login1.Seat'.freeze
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties
@@ -33,7 +33,7 @@ module DBus
         def initialize(id, manager = Manager.new)
           seat_path = manager.GetSeat(id).first
           @object = manager.service.object(seat_path)
-                                   .tap(&:introspect)
+                           .tap(&:introspect)
         end
       end
     end

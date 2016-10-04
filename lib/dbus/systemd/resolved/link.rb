@@ -25,7 +25,7 @@ module DBus
   module Systemd
     module Resolved
       class Link
-        INTERFACE = 'org.freedesktop.resolve1.Link'
+        INTERFACE = 'org.freedesktop.resolve1.Link'.freeze
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties
@@ -33,7 +33,7 @@ module DBus
         def initialize(id, manager = Manager.new)
           link_path = manager.GetLink(id).first
           @object = manager.service.object(link_path)
-                                   .tap(&:introspect)
+                           .tap(&:introspect)
         end
       end
     end

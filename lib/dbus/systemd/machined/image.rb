@@ -25,7 +25,7 @@ module DBus
   module Systemd
     module Machined
       class Image
-        INTERFACE = 'org.freedesktop.machine1.Image'
+        INTERFACE = 'org.freedesktop.machine1.Image'.freeze
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties
@@ -33,7 +33,7 @@ module DBus
         def initialize(name, manager = Manager.new)
           image_path = manager.GetImage(name).first
           @object = manager.service.object(image_path)
-                                   .tap(&:introspect)
+                           .tap(&:introspect)
         end
       end
     end

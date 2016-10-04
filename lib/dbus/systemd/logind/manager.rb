@@ -27,11 +27,11 @@ require_relative 'seat'
 module DBus
   module Systemd
     module Logind
-      INTERFACE = 'org.freedesktop.login1'
+      INTERFACE = 'org.freedesktop.login1'.freeze
 
       class Manager
-        NODE = '/org/freedesktop/login1'
-        INTERFACE = 'org.freedesktop.login1.Manager'
+        NODE = '/org/freedesktop/login1'.freeze
+        INTERFACE = 'org.freedesktop.login1.Manager'.freeze
 
         SESSION_INDICES = {
           id: 0,
@@ -39,18 +39,18 @@ module DBus
           user_name: 2,
           seat_id: 3,
           object_path: 4
-        }
+        }.freeze
 
         USER_INDICES = {
           id: 0,
           name: 1,
           object_path: 2
-        }
+        }.freeze
 
         SEAT_INDICES = {
           id: 0,
           object_path: 1
-        }
+        }.freeze
 
         INHIBITOR_INDICES = {
           what: 0,
@@ -59,7 +59,7 @@ module DBus
           mode: 3,
           user_id: 4,
           process_id: 5
-        }
+        }.freeze
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties

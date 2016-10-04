@@ -24,7 +24,7 @@ require_relative 'mixin'
 module DBus
   module Systemd
     class Unit
-      INTERFACE = 'org.freedesktop.systemd1.Unit'
+      INTERFACE = 'org.freedesktop.systemd1.Unit'.freeze
 
       include Mixin::MethodMissing
       include Mixin::Properties
@@ -32,7 +32,7 @@ module DBus
       def initialize(name, manager = Manager.new)
         unit_path = manager.GetUnit(name).first
         @object = manager.service.object(unit_path)
-                                 .tap(&:introspect)
+                         .tap(&:introspect)
       end
     end
   end

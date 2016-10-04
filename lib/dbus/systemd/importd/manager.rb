@@ -25,11 +25,11 @@ require_relative 'transfer'
 module DBus
   module Systemd
     module Importd
-      INTERFACE = 'org.freedesktop.import1'
+      INTERFACE = 'org.freedesktop.import1'.freeze
 
       class Manager
-        NODE = '/org/freedesktop/import1'
-        INTERFACE = 'org.freedesktop.import1.Manager'
+        NODE = '/org/freedesktop/import1'.freeze
+        INTERFACE = 'org.freedesktop.import1.Manager'.freeze
 
         TRANSFER_INDICES = {
           id: 0,
@@ -38,7 +38,7 @@ module DBus
           image_name: 3,
           progress: 4,
           object_path: 5
-        }
+        }.freeze
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties

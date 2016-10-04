@@ -24,8 +24,8 @@ require_relative 'mixin'
 module DBus
   module Systemd
     class Timedated
-      NODE = '/org/freedesktop/timedate1'
-      INTERFACE = 'org.freedesktop.timedate1'
+      NODE = '/org/freedesktop/timedate1'.freeze
+      INTERFACE = 'org.freedesktop.timedate1'.freeze
 
       include Mixin::MethodMissing
       include Mixin::Properties

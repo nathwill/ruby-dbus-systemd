@@ -26,18 +26,18 @@ require_relative 'image'
 module DBus
   module Systemd
     module Machined
-      INTERFACE = 'org.freedesktop.machine1'
+      INTERFACE = 'org.freedesktop.machine1'.freeze
 
       class Manager
-        NODE = '/org/freedesktop/machine1'
-        INTERFACE = 'org.freedesktop.machine1.Manager'
+        NODE = '/org/freedesktop/machine1'.freeze
+        INTERFACE = 'org.freedesktop.machine1.Manager'.freeze
 
         MACHINE_INDICES = {
           name: 0,
           class: 1,
           service_id: 2,
           object_path: 3
-        }
+        }.freeze
 
         IMAGE_INDICES = {
           name: 0,
@@ -47,7 +47,7 @@ module DBus
           modification_time: 4,
           disk_space: 5,
           object_path: 6
-        }
+        }.freeze
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties

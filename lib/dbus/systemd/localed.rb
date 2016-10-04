@@ -28,8 +28,8 @@ require_relative 'mixin'
 module DBus
   module Systemd
     class Localed
-      NODE = '/org/freedesktop/locale1'
-      INTERFACE = 'org.freedesktop.locale1'
+      NODE = '/org/freedesktop/locale1'.freeze
+      INTERFACE = 'org.freedesktop.locale1'.freeze
 
       include Mixin::MethodMissing
       include Mixin::Properties

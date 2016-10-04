@@ -25,14 +25,14 @@ module DBus
   module Systemd
     module Importd
       class Transfer
-        INTERFACE = 'org.freedesktop.import1.Transfer'
+        INTERFACE = 'org.freedesktop.import1.Transfer'.freeze
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties
 
         def initialize(id, manager = Manager.new)
           @object = manager.service.object("#{Manager::NODE}/transfer/_#{id}")
-                                   .tap(&:introspect)
+                           .tap(&:introspect)
         end
       end
     end

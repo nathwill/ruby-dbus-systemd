@@ -29,11 +29,11 @@ require_relative 'job'
 
 module DBus
   module Systemd
-    INTERFACE = 'org.freedesktop.systemd1'
+    INTERFACE = 'org.freedesktop.systemd1'.freeze
 
     class Manager
-      NODE = '/org/freedesktop/systemd1'
-      INTERFACE = 'org.freedesktop.systemd1.Manager'
+      NODE = '/org/freedesktop/systemd1'.freeze
+      INTERFACE = 'org.freedesktop.systemd1.Manager'.freeze
 
       UNIT_INDICES = {
         name: 0,
@@ -46,7 +46,7 @@ module DBus
         job_id: 7,
         job_type: 8,
         job_object_path: 9
-      }
+      }.freeze
 
       JOB_INDICES = {
         id: 0,
@@ -55,7 +55,7 @@ module DBus
         state: 3,
         object_path: 4,
         unit_object_path: 5
-      }
+      }.freeze
 
       include Mixin::MethodMissing
       include Mixin::Properties
