@@ -20,10 +20,12 @@
 #
 require_relative '../unit'
 
-module DBus::Systemd
-  class Unit
-    class Socket < Unit
-      INTERFACE = 'org.freedesktop.systemd1.Socket'.freeze
+module DBus
+  module Systemd
+    class Unit
+      class Socket < Unit
+        INTERFACE = 'org.freedesktop.systemd1.Socket'.freeze
+      end
     end
   end
 end

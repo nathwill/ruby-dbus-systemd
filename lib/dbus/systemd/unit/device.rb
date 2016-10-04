@@ -20,10 +20,12 @@
 #
 require_relative '../unit'
 
-module DBus::Systemd
-  class Unit
-    class Device < Unit
-      INTERFACE = 'org.freedesktop.systemd1.Device'.freeze
+module DBus
+  module Systemd
+    class Unit
+      class Device < Unit
+        INTERFACE = 'org.freedesktop.systemd1.Device'.freeze
+      end
     end
   end
 end
