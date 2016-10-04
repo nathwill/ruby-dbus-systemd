@@ -24,6 +24,7 @@ module DBus
   module Systemd
     class Unit
       class Service < Unit
+        # systemd service unit dbus interface
         INTERFACE = 'org.freedesktop.systemd1.Service'.freeze
       end
     end

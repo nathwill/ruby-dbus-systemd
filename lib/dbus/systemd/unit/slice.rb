@@ -24,6 +24,7 @@ module DBus
   module Systemd
     class Unit
       class Slice < Unit
+        # systemd slice unit dbus interface
         INTERFACE = 'org.freedesktop.systemd1.Slice'.freeze
       end
     end

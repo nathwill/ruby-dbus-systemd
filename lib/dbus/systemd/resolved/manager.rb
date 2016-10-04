@@ -25,21 +25,40 @@ require_relative 'link'
 module DBus
   module Systemd
     module Resolved
+      # resolved dbus interface
       INTERFACE = 'org.freedesktop.resolve1'.freeze
 
       class Manager
+        # resolved manager object dbus node path
         NODE = '/org/freedesktop/resolve1'.freeze
+
+        # resolved manager dbus interface
         INTERFACE = 'org.freedesktop.resolve1.Manager'.freeze
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties
 
+        # @return [DBus::Service]
+        # @api private
         attr_reader :service
 
+        #
+        # get a new resolved manager dbus proxy object
+        #
+        # @param bus [DBus::SystemBus, DBus::SessionBus] dbus instance
         def initialize(bus = Systemd::Helpers.system_bus)
           @service = bus.service(Resolved::INTERFACE)
           @object = @service.object(NODE)
                             .tap(&:introspect)
+        end
+
+        #
+        # get a resolved link by id
+        #
+        # @param id [Integer] resolved link id
+        # @return [DBus::Systemd::Resolved::Link] resolved link dbus proxy object
+        def link(id)
+          Link.new(id, self)
         end
       end
     end

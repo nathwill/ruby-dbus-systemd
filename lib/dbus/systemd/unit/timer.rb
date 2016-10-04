@@ -24,6 +24,7 @@ module DBus
   module Systemd
     class Unit
       class Timer < Unit
+        # systemd timer unit dbus interface
         INTERFACE = 'org.freedesktop.systemd1.Timer'.freeze
       end
     end

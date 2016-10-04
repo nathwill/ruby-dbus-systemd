@@ -24,6 +24,7 @@ module DBus
   module Systemd
     class Unit
       class Automount < Unit
+        # systemd automount unit dbus interface
         INTERFACE = 'org.freedesktop.systemd1.Automount'.freeze
       end
     end

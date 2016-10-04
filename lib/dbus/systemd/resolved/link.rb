@@ -25,11 +25,17 @@ module DBus
   module Systemd
     module Resolved
       class Link
+        # resolved link dbus interface
         INTERFACE = 'org.freedesktop.resolve1.Link'.freeze
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties
 
+        #
+        # create a new link dbus proxy object
+        #
+        # @param id [Integer] resolved link id
+        # @param manager [DBus::Systemd::Resolved::Manager] resolved manager object
         def initialize(id, manager = Manager.new)
           link_path = manager.GetLink(id).first
           @object = manager.service.object(link_path)

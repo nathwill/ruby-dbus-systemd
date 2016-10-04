@@ -25,23 +25,38 @@ require_relative 'link'
 module DBus
   module Systemd
     module Networkd
+      # networkd dbus interface
       INTERFACE = 'org.freedesktop.network1'.freeze
 
       class Manager
+        # networkd manager object dbus node path
         NODE = '/org/freedesktop/network1'.freeze
+
+        # networkd manager dbus interface
         INTERFACE = 'org.freedesktop.network1.Manager'.freeze
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties
 
+        # @return [DBus::Service]
+        # @api private
         attr_reader :service
 
+        #
+        # create a networkd manager dbus proxy object
+        #
+        # @param bus [DBus::SystemBus, DBus::SessionBus] dbus instance
         def initialize(bus = Systemd::Helpers.system_bus)
           @service = bus.service(Networkd::INTERFACE)
           @object = @service.object(NODE)
                             .tap(&:introspect)
         end
 
+        #
+        # get a link by id
+        #
+        # @param id [Integer] networkd link id
+        # @return [DBus::Systemd::Networkd::Link] networkd link dbus proxy object
         def link(id)
           Link.new(id, self)
         end

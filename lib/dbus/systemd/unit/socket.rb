@@ -24,6 +24,7 @@ module DBus
   module Systemd
     class Unit
       class Socket < Unit
+        # systemd socket unit dbus interface
         INTERFACE = 'org.freedesktop.systemd1.Socket'.freeze
       end
     end

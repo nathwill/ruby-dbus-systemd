@@ -24,6 +24,7 @@ module DBus
   module Systemd
     class Unit
       class Scope < Unit
+        # systemd scope unit dbus interface
         INTERFACE = 'org.freedesktop.systemd1.Scope'.freeze
       end
     end

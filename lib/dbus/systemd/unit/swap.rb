@@ -24,6 +24,7 @@ module DBus
   module Systemd
     class Unit
       class Swap < Unit
+        # systemd swap unit dbus interface
         INTERFACE = 'org.freedesktop.systemd1.Swap'.freeze
       end
     end

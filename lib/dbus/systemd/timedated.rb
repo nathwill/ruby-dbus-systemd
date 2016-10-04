@@ -33,6 +33,8 @@ module DBus
       include Mixin::MethodMissing
       include Mixin::Properties
 
+      # @return [DBus::Service]
+      # @api private
       attr_reader :service
 
       #
