@@ -24,7 +24,7 @@ module DBus
   module Systemd
     class Unit
       class Timer < Unit
-        INTERFACE = 'org.freedesktop.systemd1.Unit'.freeze
+        INTERFACE = 'org.freedesktop.systemd1.Timer'.freeze
       end
     end
   end
