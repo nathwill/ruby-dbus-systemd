@@ -22,11 +22,18 @@ raise "Bad hostnamed result unless" unless hostnamed.properties['Hostname'] == t
 # Importd
 #
 importd_mgr = DBus::Systemd::Importd::Manager.new
+mm = DBus::Systemd::Machined::Manager.new
 
-transfer = importd_mgr.PullRaw('https://dl.fedoraproject.org/pub/fedora/linux/releases/24/CloudImages/x86_64/images/Fedora-Cloud-Base-24-1.2.x86_64.raw.xz', 'Fedora-24', 'no', false)
+unless mm.images.detect { |i| i[:name] == 'Fedora-24' }
+  transfer = importd_mgr.PullRaw('https://dl.fedoraproject.org/pub/fedora/linux/releases/24/CloudImages/x86_64/images/Fedora-Cloud-Base-24-1.2.x86_64.raw.xz', 'Fedora-24', 'no', false)
+end
 
-importd_transfer = DBus::Systemd::Importd::Transfer.new(importd_mgr.map_transfer(transfer)[:id])
-raise "Bad importd transfer result" unless importd_transfer.properties['Type'] == 'pull-raw'
+unless importd_mgr.transfers.empty?
+  if importd_mgr.transfers.detect { |t| t[:name] == 'Fedora-24' }
+    importd_transfer = DBus::Systemd::Importd::Transfer.new(importd_mgr.map_transfer(transfer)[:id])
+    raise "Bad importd transfer result" unless importd_transfer.properties['Type'] == 'pull-raw'
+  end
+end
 
 #
 # Localed
@@ -95,8 +102,18 @@ raise "bad unit result" unless unit.properties['SubState'] == 'running'
 machined_mgr = DBus::Systemd::Machined::Manager.new
 raise "uh oh" unless machined_mgr.respond_to?(:GetMachine)
 
-img = machined_mgr.image('Fedora-24')
-img.Clone('test', false)
+if machined_mgr.images.detect { |i| i[:name] == 'Fedora-24' }
+  img = machined_mgr.image('Fedora-24')
 
-res = machined_mgr.RegisterMachine('test', '', 'nathan', 'container', Process.pid, '')
-raise "register machine failure" unless res.first == '/org/freedesktop/machine1/machine/test'
+  unless machined_mgr.images.detect { |i| i[:name] == 'test' }
+    img.Clone('test', false)
+
+    unless machined_mgr.machines.detect { |i| i[:name] == 'test' }
+      res = machined_mgr.RegisterMachine('test', '', 'dbus-systemd', 'container', Process.pid, '')
+      raise "register machine failure" unless res.first == '/org/freedesktop/machine1/machine/test'
+
+      machine = DBus::Systemd::Machined::Machine.new('test')
+      raise "machine trouble" unless machine.GetOSRelease.first['VERSION_ID'] == '24'
+    end
+  end
+end
