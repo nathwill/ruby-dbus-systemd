@@ -26,7 +26,9 @@ importd_mgr = DBus::Systemd::Importd::Manager.new
 mm = DBus::Systemd::Machined::Manager.new
 
 if  !mm.images.detect { |i| i[:name] == 'Fedora-24' }
-  if !mm.transfers.detect { |i| i[:name] == 'Fedora-24' }
+  puts "no image found, checking for transfer in progress"
+  if !importd_mgr.transfers.detect { |i| i[:image_name] == 'Fedora-24' }
+    puts "no transfer found, starting transfer"
     transfer = importd_mgr.PullRaw('https://dl.fedoraproject.org/pub/fedora/linux/releases/24/CloudImages/x86_64/images/Fedora-Cloud-Base-24-1.2.x86_64.raw.xz', 'Fedora-24', 'no', false)
     puts "started Fedora-24 import :)"
   else
@@ -37,7 +39,7 @@ else
 end
 
 unless importd_mgr.transfers.empty?
-  if importd_mgr.transfers.detect { |t| t[:name] == 'Fedora-24' }
+  if importd_mgr.transfers.detect { |t| t[:image_name] == 'Fedora-24' }
     importd_transfer = DBus::Systemd::Importd::Transfer.new(importd_mgr.map_transfer(transfer)[:id])
     raise "Bad importd transfer result" unless importd_transfer.properties['Type'] == 'pull-raw'
     puts "transfer is in progress :)"
