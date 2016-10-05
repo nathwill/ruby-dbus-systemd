@@ -1,5 +1,8 @@
 # DBus::Systemd
 
+[![Gem Version](https://badge.fury.io/rb/dbus-systemd.svg)](https://badge.fury.io/rb/dbus-systemd)
+[![Test Status](https://travis-ci.org/nathwill/ruby-dbus-systemd.svg?branch=master)](https://travis-ci.org/nathwill/ruby-dbus-systemd)
+
 Ruby library for simplifying access to systemd dbus interfaces.
 
 *Huge* thanks to the [ruby-dbus](https://rubygems.org/gems/ruby-dbus) library,
