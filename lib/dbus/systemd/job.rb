@@ -38,7 +38,8 @@ module DBus
       def initialize(id, manager = Manager.new)
         job_path = manager.GetJob(id).first
         @object = manager.service.object(job_path)
-                         .tap(&:introspect)
+        @object.default_iface = INTERFACE
+        @object.introspect
       end
     end
   end

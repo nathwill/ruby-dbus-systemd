@@ -69,7 +69,8 @@ module DBus
         def initialize(bus = Systemd::Helpers.system_bus)
           @service = bus.service(Machined::INTERFACE)
           @object = @service.object(NODE)
-                            .tap(&:introspect)
+          @object.default_iface = INTERFACE
+          @object.introspect
         end
 
         #

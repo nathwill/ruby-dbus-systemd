@@ -39,7 +39,8 @@ module DBus
         def initialize(id, manager = Manager.new)
           seat_path = manager.GetSeat(id).first
           @object = manager.service.object(seat_path)
-                           .tap(&:introspect)
+          @object.default_iface = INTERFACE
+          @object.introspect
         end
       end
     end

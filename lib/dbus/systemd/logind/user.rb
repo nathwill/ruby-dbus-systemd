@@ -39,7 +39,8 @@ module DBus
         def initialize(id, manager = Manager.new)
           user_path = manager.GetUser(id).first
           @object = manager.service.object(user_path)
-                           .tap(&:introspect)
+          @object.default_iface = INTERFACE
+          @object.introspect
         end
       end
     end

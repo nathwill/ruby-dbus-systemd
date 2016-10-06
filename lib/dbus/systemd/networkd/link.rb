@@ -38,7 +38,8 @@ module DBus
         # @param manager [DBus::Systemd::Networkd::Manager] networkd manager object
         def initialize(id, manager = Manager.new)
           @object = manager.service.object("#{Manager::NODE}/link/#{id}")
-                           .tap(&:introspect)
+          @object.default_iface = INTERFACE
+          @object.introspect
         end
       end
     end

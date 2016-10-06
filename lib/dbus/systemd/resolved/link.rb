@@ -39,7 +39,8 @@ module DBus
         def initialize(id, manager = Manager.new)
           link_path = manager.GetLink(id).first
           @object = manager.service.object(link_path)
-                           .tap(&:introspect)
+          @object.default_iface = INTERFACE
+          @object.introspect
         end
       end
     end
