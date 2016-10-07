@@ -5,6 +5,10 @@ describe DBus::Systemd::Localed do
     expect(DBus::Systemd::Localed::NODE).to eq '/org/freedesktop/locale1'
   end
 
+  it 'sets the right service' do
+    expect(DBus::Systemd::Localed::SERVICE).to eq 'org.freedesktop.locale1'
+  end
+
   it 'sets the right interface' do
     expect(DBus::Systemd::Localed::INTERFACE).to eq 'org.freedesktop.locale1'
   end
