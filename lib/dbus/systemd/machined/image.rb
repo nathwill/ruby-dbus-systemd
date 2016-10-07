@@ -39,7 +39,8 @@ module DBus
         def initialize(name, manager = Manager.new)
           image_path = manager.GetImage(name).first
           @object = manager.service.object(image_path)
-                           .tap(&:introspect)
+          @object.default_iface = INTERFACE
+          @object.introspect
         end
       end
     end

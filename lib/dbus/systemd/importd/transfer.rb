@@ -38,7 +38,8 @@ module DBus
         # @param manager [DBus::Systemd::Importd::Manager] the importd manager object
         def initialize(id, manager = Manager.new)
           @object = manager.service.object("#{Manager::NODE}/transfer/_#{id}")
-                           .tap(&:introspect)
+          @object.default_iface = INTERFACE
+          @object.introspect
         end
       end
     end

@@ -27,8 +27,8 @@ require_relative 'seat'
 module DBus
   module Systemd
     module Logind
-      # the logind objet dbus interface
-      INTERFACE = 'org.freedesktop.login1'.freeze
+      # the logind objet dbus service
+      SERVICE = 'org.freedesktop.login1'.freeze
 
       class Manager
         # the logind manager object dbus node path
@@ -81,9 +81,10 @@ module DBus
         #
         # @param bus [DBus::SystemBus, DBus::SessionBus] dbus instance
         def initialize(bus = Systemd::Helpers.system_bus)
-          @service = bus.service(Logind::INTERFACE)
+          @service = bus.service(Logind::SERVICE)
           @object = @service.object(NODE)
-                            .tap(&:introspect)
+          @object.default_iface = INTERFACE
+          @object.introspect
         end
 
         #

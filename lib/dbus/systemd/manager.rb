@@ -29,8 +29,8 @@ require_relative 'job'
 
 module DBus
   module Systemd
-    # systemd dbus interface
-    INTERFACE = 'org.freedesktop.systemd1'.freeze
+    # systemd dbus service
+    SERVICE = 'org.freedesktop.systemd1'.freeze
 
     class Manager
       # systemd manager object dbus node path
@@ -75,9 +75,10 @@ module DBus
       #
       # @param bus [DBus::SystemBus, DBus::SessionBus] bus instance
       def initialize(bus = Systemd::Helpers.system_bus)
-        @service = bus.service(Systemd::INTERFACE)
+        @service = bus.service(Systemd::SERVICE)
         @object = @service.object(NODE)
-                          .tap(&:introspect)
+        @object.default_iface = INTERFACE
+        @object.introspect
       end
 
       #

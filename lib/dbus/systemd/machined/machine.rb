@@ -39,7 +39,8 @@ module DBus
         def initialize(name, manager = Manager.new)
           machine_path = manager.GetMachine(name).first
           @object = manager.service.object(machine_path)
-                           .tap(&:introspect)
+          @object.default_iface = INTERFACE
+          @object.introspect
         end
       end
     end

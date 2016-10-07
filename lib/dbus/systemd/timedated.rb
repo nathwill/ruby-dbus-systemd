@@ -27,8 +27,8 @@ module DBus
       # the timedated dbus node path
       NODE = '/org/freedesktop/timedate1'.freeze
 
-      # the timedated dbus interface
-      INTERFACE = 'org.freedesktop.timedate1'.freeze
+      # the timedated dbus service & interface
+      SERVICE = INTERFACE = 'org.freedesktop.timedate1'.freeze
 
       include Mixin::MethodMissing
       include Mixin::Properties
@@ -42,9 +42,10 @@ module DBus
       #
       # @param bus [DBus::SystemBus, DBus::SessionBus] dbus instance
       def initialize(bus = Helpers.system_bus)
-        @service = bus.service(INTERFACE)
+        @service = bus.service(SERVICE)
         @object = @service.object(NODE)
-                          .tap(&:introspect)
+        @object.default_iface = INTERFACE
+        @object.introspect
       end
     end
   end

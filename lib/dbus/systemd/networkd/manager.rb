@@ -25,8 +25,8 @@ require_relative 'link'
 module DBus
   module Systemd
     module Networkd
-      # networkd dbus interface
-      INTERFACE = 'org.freedesktop.network1'.freeze
+      # networkd dbus service
+      SERVICE = 'org.freedesktop.network1'.freeze
 
       class Manager
         # networkd manager object dbus node path
@@ -47,9 +47,10 @@ module DBus
         #
         # @param bus [DBus::SystemBus, DBus::SessionBus] dbus instance
         def initialize(bus = Systemd::Helpers.system_bus)
-          @service = bus.service(Networkd::INTERFACE)
+          @service = bus.service(Networkd::SERVICE)
           @object = @service.object(NODE)
-                            .tap(&:introspect)
+          @object.default_iface = INTERFACE
+          @object.introspect
         end
 
         #

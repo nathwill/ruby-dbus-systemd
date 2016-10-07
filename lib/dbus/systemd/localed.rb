@@ -31,8 +31,8 @@ module DBus
       # the localed object dbus node path
       NODE = '/org/freedesktop/locale1'.freeze
 
-      # the localed object dbus interface
-      INTERFACE = 'org.freedesktop.locale1'.freeze
+      # the localed object dbus service & interface
+      SERVICE = INTERFACE = 'org.freedesktop.locale1'.freeze
 
       include Mixin::MethodMissing
       include Mixin::Properties
@@ -46,9 +46,10 @@ module DBus
       #
       # @param bus [DBus::SystemBus, DBus::SessionBus] the bus instance
       def initialize(bus = Helpers.system_bus)
-        @service = bus.service(INTERFACE)
+        @service = bus.service(SERVICE)
         @object = @service.object(NODE)
-                          .tap(&:introspect)
+        @object.default_iface = INTERFACE
+        @object.introspect
       end
     end
   end

@@ -5,7 +5,7 @@ describe DBus::Systemd do
     expect(DBus::Systemd::VERSION).not_to be nil
   end
 
-  it 'sets the appropriate interface' do
-    expect(DBus::Systemd::INTERFACE).to eq 'org.freedesktop.systemd1'
+  it 'sets the appropriate service' do
+    expect(DBus::Systemd::SERVICE).to eq 'org.freedesktop.systemd1'
   end
 end

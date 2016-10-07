@@ -26,8 +26,8 @@ require_relative 'image'
 module DBus
   module Systemd
     module Machined
-      # machined dbus interface
-      INTERFACE = 'org.freedesktop.machine1'.freeze
+      # machined dbus service
+      SERVICE = 'org.freedesktop.machine1'.freeze
 
       class Manager
         # machined manager dbus object node path
@@ -67,9 +67,10 @@ module DBus
         #
         # @param bus [DBus::SystemBus, DBus::SessionBus] dbus instance
         def initialize(bus = Systemd::Helpers.system_bus)
-          @service = bus.service(Machined::INTERFACE)
+          @service = bus.service(Machined::SERVICE)
           @object = @service.object(NODE)
-                            .tap(&:introspect)
+          @object.default_iface = INTERFACE
+          @object.introspect
         end
 
         #

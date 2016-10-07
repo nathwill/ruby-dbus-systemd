@@ -26,7 +26,7 @@ module DBus
   module Systemd
     module Importd
       # the importd dbus interface
-      INTERFACE = 'org.freedesktop.import1'.freeze
+      SERVICE = 'org.freedesktop.import1'.freeze
 
       class Manager
         # the importd manager dbus node path
@@ -58,9 +58,10 @@ module DBus
         #
         # @param bus [DBus::SystemBus, DBus::SessionBus] dbus instance
         def initialize(bus = Systemd::Helpers.system_bus)
-          @service = bus.service(Importd::INTERFACE)
+          @service = bus.service(Importd::SERVICE)
           @object = @service.object(NODE)
-                            .tap(&:introspect)
+          @object.default_iface = INTERFACE
+          @object.introspect
         end
 
         #
