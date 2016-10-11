@@ -19,7 +19,16 @@ unit = mgr.unit('sshd.service')
 raise "bad unit result" unless unit.properties['SubState'] == 'running'
 puts "successfully checked unit state"
 
-# systemd's too damn fast... need to find another way to test this, maybe with a slower service
-#job = mgr.get_job_by_object_path(unit.Restart('replace').first)
-#raise "bad job result" unless job.properties['JobType'] == 'restart'
-# puts "successfully checked job status"
+loop = DBus::Main.new
+loop << mgr.bus
+
+job_path = nil
+
+mgr.on_signal('JobRemoved') do |id, path, unit, result|
+  puts "Job #{id} completed for #{unit} with result: #{result}"
+  loop.quit if path == job_path
+end
+
+job_path = mgr.RestartUnit('sshd.service', 'replace').first
+
+loop.run

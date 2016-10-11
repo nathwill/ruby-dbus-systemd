@@ -35,3 +35,6 @@ force_dl = true
 transfer_id = importd.PullRaw(source, img_name, verify_mode, force_dl).first
 
 loop.run
+
+raise "no image found" unless machined.images.detect { |img| img[:name] == img_name }
+puts "found image"
