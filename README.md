@@ -13,7 +13,8 @@ Recommended Reading
   - [introduction to d-bus concepts section of sd-bus announcement blog post](http://0pointer.net/blog/the-new-sd-bus-api-of-systemd.html)
   - [systemd D-Bus specification](https://www.freedesktop.org/wiki/Software/systemd/dbus/)
   - [D-Bus specification](https://dbus.freedesktop.org/doc/dbus-specification.html)
-  
+  - ruby-dbus [examples](https://github.com/mvidner/ruby-dbus/tree/master/examples) & [docs](https://github.com/mvidner/ruby-dbus/tree/master/doc)
+
 ## Installation
 
 Add this line to your application's Gemfile:
