@@ -2,8 +2,8 @@
 /.vagrant/
 /.bundle/
 /.yardoc
-/Gemfile.lock
 /_yardoc/
+Gemfile.lock
 /coverage/
 /doc/
 /pkg/
