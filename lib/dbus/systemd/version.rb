@@ -21,6 +21,6 @@
 module DBus
   module Systemd
     # dbus-systemd gem version
-    VERSION = '1.1.1'.freeze
+    VERSION = '1.1.2'.freeze
   end
 end
