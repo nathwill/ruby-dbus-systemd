@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (C) 2016 Nathan Williams <nath.e.will@gmail.com>
 #
@@ -26,7 +28,7 @@ module DBus
     module Logind
       class Session
         # logind session object dbus interface
-        INTERFACE = 'org.freedesktop.login1.Session'.freeze
+        INTERFACE = 'org.freedesktop.login1.Session'
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties

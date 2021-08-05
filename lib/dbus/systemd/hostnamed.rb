@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (C) 2016 Nathan Williams <nath.e.will@gmail.com>
 #
@@ -29,10 +31,10 @@ module DBus
   module Systemd
     class Hostnamed
       # the hostnamed dbus node path
-      NODE = '/org/freedesktop/hostname1'.freeze
+      NODE = '/org/freedesktop/hostname1'
 
       # the hostnamed dbus service & interface
-      SERVICE = INTERFACE = 'org.freedesktop.hostname1'.freeze
+      SERVICE = INTERFACE = 'org.freedesktop.hostname1'
 
       include Mixin::MethodMissing
       include Mixin::Properties

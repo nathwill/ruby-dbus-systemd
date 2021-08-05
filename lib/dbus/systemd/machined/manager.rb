@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (C) 2016 Nathan Williams <nath.e.will@gmail.com>
 #
@@ -27,14 +29,14 @@ module DBus
   module Systemd
     module Machined
       # machined dbus service
-      SERVICE = 'org.freedesktop.machine1'.freeze
+      SERVICE = 'org.freedesktop.machine1'
 
       class Manager
         # machined manager dbus object node path
-        NODE = '/org/freedesktop/machine1'.freeze
+        NODE = '/org/freedesktop/machine1'
 
         # machined manager dbus interface
-        INTERFACE = 'org.freedesktop.machine1.Manager'.freeze
+        INTERFACE = 'org.freedesktop.machine1.Manager'
 
         # machine array index map as returned by ListMachines
         MACHINE_INDICES = {

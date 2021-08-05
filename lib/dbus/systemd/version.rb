@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (C) 2016 Nathan Williams <nath.e.will@gmail.com>
 #
@@ -21,6 +23,6 @@
 module DBus
   module Systemd
     # dbus-systemd gem version
-    VERSION = '1.1.2'.freeze
+    VERSION = '1.1.2'
   end
 end

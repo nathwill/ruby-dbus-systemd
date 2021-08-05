@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (C) 2016 Nathan Williams <nath.e.will@gmail.com>
 #
@@ -26,7 +28,7 @@ module DBus
     module Resolved
       class Link
         # resolved link dbus interface
-        INTERFACE = 'org.freedesktop.resolve1.Link'.freeze
+        INTERFACE = 'org.freedesktop.resolve1.Link'
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (C) 2016 Nathan Williams <nath.e.will@gmail.com>
 #
@@ -25,7 +27,7 @@ module DBus
     class Unit
       class Device < Unit
         # systemd device unit dbus interface
-        INTERFACE = 'org.freedesktop.systemd1.Device'.freeze
+        INTERFACE = 'org.freedesktop.systemd1.Device'
       end
     end
   end

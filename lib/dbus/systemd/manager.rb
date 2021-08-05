@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (C) 2016 Nathan Williams <nath.e.will@gmail.com>
 #
@@ -30,14 +32,14 @@ require_relative 'job'
 module DBus
   module Systemd
     # systemd dbus service
-    SERVICE = 'org.freedesktop.systemd1'.freeze
+    SERVICE = 'org.freedesktop.systemd1'
 
     class Manager
       # systemd manager object dbus node path
-      NODE = '/org/freedesktop/systemd1'.freeze
+      NODE = '/org/freedesktop/systemd1'
 
       # systemd manager dbus interface
-      INTERFACE = 'org.freedesktop.systemd1.Manager'.freeze
+      INTERFACE = 'org.freedesktop.systemd1.Manager'
 
       # index map of unit array returned by ListUnits
       UNIT_INDICES = {

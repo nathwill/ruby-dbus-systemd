@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (C) 2016 Nathan Williams <nath.e.will@gmail.com>
 #
@@ -25,7 +27,7 @@ module DBus
     class Unit
       class Snapshot < Unit
         # systemd snapshot unit dbus interface
-        INTERFACE = 'org.freedesktop.systemd1.Snapshot'.freeze
+        INTERFACE = 'org.freedesktop.systemd1.Snapshot'
       end
     end
   end

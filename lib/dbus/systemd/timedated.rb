@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (C) 2016 Nathan Williams <nath.e.will@gmail.com>
 #
@@ -25,10 +27,10 @@ module DBus
   module Systemd
     class Timedated
       # the timedated dbus node path
-      NODE = '/org/freedesktop/timedate1'.freeze
+      NODE = '/org/freedesktop/timedate1'
 
       # the timedated dbus service & interface
-      SERVICE = INTERFACE = 'org.freedesktop.timedate1'.freeze
+      SERVICE = INTERFACE = 'org.freedesktop.timedate1'
 
       include Mixin::MethodMissing
       include Mixin::Properties

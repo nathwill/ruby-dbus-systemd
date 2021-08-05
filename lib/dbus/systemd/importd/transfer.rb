@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (C) 2016 Nathan Williams <nath.e.will@gmail.com>
 #
@@ -26,7 +28,7 @@ module DBus
     module Importd
       class Transfer
         # importd transfer object dbus interface
-        INTERFACE = 'org.freedesktop.import1.Transfer'.freeze
+        INTERFACE = 'org.freedesktop.import1.Transfer'
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties

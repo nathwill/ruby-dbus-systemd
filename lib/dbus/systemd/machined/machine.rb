@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (C) 2016 Nathan Williams <nath.e.will@gmail.com>
 #
@@ -26,7 +28,7 @@ module DBus
     module Machined
       class Machine
         # machined machine object dbus interface
-        INTERFACE = 'org.freedesktop.machine1.Machine'.freeze
+        INTERFACE = 'org.freedesktop.machine1.Machine'
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties

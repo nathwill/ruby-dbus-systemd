@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (C) 2016 Nathan Williams <nath.e.will@gmail.com>
 #
@@ -26,14 +28,14 @@ module DBus
   module Systemd
     module Resolved
       # resolved dbus interface
-      INTERFACE = 'org.freedesktop.resolve1'.freeze
+      INTERFACE = 'org.freedesktop.resolve1'
 
       class Manager
         # resolved manager object dbus node path
-        NODE = '/org/freedesktop/resolve1'.freeze
+        NODE = '/org/freedesktop/resolve1'
 
         # resolved manager dbus interface
-        INTERFACE = 'org.freedesktop.resolve1.Manager'.freeze
+        INTERFACE = 'org.freedesktop.resolve1.Manager'
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties

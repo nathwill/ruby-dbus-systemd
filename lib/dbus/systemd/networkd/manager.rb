@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (C) 2016 Nathan Williams <nath.e.will@gmail.com>
 #
@@ -26,14 +28,14 @@ module DBus
   module Systemd
     module Networkd
       # networkd dbus service
-      SERVICE = 'org.freedesktop.network1'.freeze
+      SERVICE = 'org.freedesktop.network1'
 
       class Manager
         # networkd manager object dbus node path
-        NODE = '/org/freedesktop/network1'.freeze
+        NODE = '/org/freedesktop/network1'
 
         # networkd manager dbus interface
-        INTERFACE = 'org.freedesktop.network1.Manager'.freeze
+        INTERFACE = 'org.freedesktop.network1.Manager'
 
         include Systemd::Mixin::MethodMissing
         include Systemd::Mixin::Properties

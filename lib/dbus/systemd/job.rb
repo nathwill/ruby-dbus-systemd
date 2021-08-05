@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (C) 2016 Nathan Williams <nath.e.will@gmail.com>
 #
@@ -25,7 +27,7 @@ module DBus
   module Systemd
     class Job
       # systemd job object dbus interface
-      INTERFACE = 'org.freedesktop.systemd1.Job'.freeze
+      INTERFACE = 'org.freedesktop.systemd1.Job'
 
       include Mixin::MethodMissing
       include Mixin::Properties

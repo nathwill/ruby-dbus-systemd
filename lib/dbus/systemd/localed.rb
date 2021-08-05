@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (C) 2016 Nathan Williams <nath.e.will@gmail.com>
 #
@@ -29,10 +31,10 @@ module DBus
   module Systemd
     class Localed
       # the localed object dbus node path
-      NODE = '/org/freedesktop/locale1'.freeze
+      NODE = '/org/freedesktop/locale1'
 
       # the localed object dbus service & interface
-      SERVICE = INTERFACE = 'org.freedesktop.locale1'.freeze
+      SERVICE = INTERFACE = 'org.freedesktop.locale1'
 
       include Mixin::MethodMissing
       include Mixin::Properties

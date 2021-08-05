@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (C) 2016 Nathan Williams <nath.e.will@gmail.com>
 #
@@ -26,14 +28,14 @@ module DBus
   module Systemd
     module Importd
       # the importd dbus interface
-      SERVICE = 'org.freedesktop.import1'.freeze
+      SERVICE = 'org.freedesktop.import1'
 
       class Manager
         # the importd manager dbus node path
-        NODE = '/org/freedesktop/import1'.freeze
+        NODE = '/org/freedesktop/import1'
 
         # the importd manager dbus interface
-        INTERFACE = 'org.freedesktop.import1.Manager'.freeze
+        INTERFACE = 'org.freedesktop.import1.Manager'
 
         # index mapping of transfer array returned from ListTransfers()
         TRANSFER_INDICES = {

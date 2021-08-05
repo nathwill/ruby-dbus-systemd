@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Copyright (C) 2016 Nathan Williams <nath.e.will@gmail.com>
 #
@@ -28,14 +30,14 @@ module DBus
   module Systemd
     module Logind
       # the logind objet dbus service
-      SERVICE = 'org.freedesktop.login1'.freeze
+      SERVICE = 'org.freedesktop.login1'
 
       class Manager
         # the logind manager object dbus node path
-        NODE = '/org/freedesktop/login1'.freeze
+        NODE = '/org/freedesktop/login1'
 
         # the logind manager object dbus interface
-        INTERFACE = 'org.freedesktop.login1.Manager'.freeze
+        INTERFACE = 'org.freedesktop.login1.Manager'
 
         # session array index map as returned by ListSessions
         SESSION_INDICES = {
